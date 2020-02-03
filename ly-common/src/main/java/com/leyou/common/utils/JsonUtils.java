@@ -3,11 +3,17 @@ package com.leyou.common.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
+import com.leyou.common.enums.ExceptionEnum;
 import com.sun.istack.internal.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +35,14 @@ public class JsonUtils {
         if (obj.getClass() == String.class) {
             return (String) obj;
         }
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
+            if (obj.getClass() == ExceptionEnum.class) {
+                ExceptionEnum exceptionEnum = (ExceptionEnum)obj;
+                Map<Integer, String> map = new LinkedHashMap<>();
+                map.put(exceptionEnum.getCode(), exceptionEnum.getMsg());
+                return mapper.writeValueAsString(map);
+            }
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             logger.error("json序列化出错：" + obj, e);

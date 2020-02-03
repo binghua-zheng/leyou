@@ -20,6 +20,9 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
 #    instance-id: ${spring.application.name}:${server.port}
-logging:
-  level:
-    com.leyou.item.mapper: debug
+#logging:
+#  level:
+#    com.leyou.item.mapper: debug
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
