@@ -5,7 +5,11 @@ import com.leyou.common.vo.PageResult;
 import com.leyou.item.pojo.Brand;
 import com.leyou.item.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @ClassName BrandController
@@ -28,7 +32,13 @@ public class BrandController {
      * @return
      */
     @GetMapping("page")
-    public PageResult<Brand> queryBrandByPage(PageRequestParam pageRequestParam){
-        return brandService.queryBrandByPage(pageRequestParam);
+    public ResponseEntity<PageResult<Brand>> queryBrandByPage(PageRequestParam pageRequestParam){
+        return ResponseEntity.ok(brandService.queryBrandByPage(pageRequestParam));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> saveBrand(Brand brand, @RequestParam("cids")List<Long> categoryIds){
+        brandService.saveBrand(brand, categoryIds);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

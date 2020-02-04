@@ -59,4 +59,26 @@ public class BrandService {
         PageInfo<Brand> pageInfo = new PageInfo<>(list);
         return new PageResult<>(pageInfo.getTotal(), list);
     }
+
+    /**
+     * 添加品牌
+     *
+     * @param brand
+     * @param categoryIds
+     */
+    public void saveBrand(Brand brand, List<Long> categoryIds){
+        int count = 0;
+        // 添加品牌表
+        count = brandMapper.insertSelective(brand);
+        if (count != 1) {
+            throw new LyException(ExceptionEnum.BRAND_SAVE_ERROR);
+        }
+        // 添加品牌-分类中间表
+        for (Long cId : categoryIds) {
+            count = brandMapper.insertBrandCategoryRelation(brand.getId(), cId);
+            if (count != 1) {
+                throw new LyException(ExceptionEnum.BRAND_SAVE_ERROR);
+            }
+        }
+    }
 }
