@@ -15,6 +15,9 @@ public enum ExceptionEnum {
     BRAND_SAVE_ERROR(500, "添加品牌错误"),
     INVALID_FILE_TYPE(400, "文件类型错误"),
     UPLOAD_FILE_ERROR(500, "上传文件错误"),
+    SPECGROP_NOT_FOND(404, "规格组没查到"),
+    SPEC_INFO_NOT_FOND(404, "规格信息没查到"),
+    GOODS_NOT_FOND(404, "商品信息没查到")
     ;
 
     private int code;

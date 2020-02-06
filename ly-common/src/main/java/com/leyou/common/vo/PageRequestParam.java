@@ -21,4 +21,6 @@ public class PageRequestParam {
     private Boolean desc;
 
     private String key;
+
+    private Boolean saleable;
 }

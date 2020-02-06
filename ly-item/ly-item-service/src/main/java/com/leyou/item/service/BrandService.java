@@ -81,4 +81,20 @@ public class BrandService {
             }
         }
     }
+
+    /**
+     * 根据品牌ID查询品牌
+     *
+     * @param brandId
+     * @return
+     */
+    public Brand queryBrandById(Long brandId) {
+        Brand brand = new Brand();
+        brand.setId(brandId);
+        Brand result = brandMapper.selectByPrimaryKey(brand);
+        if (result == null) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return result;
+    }
 }
