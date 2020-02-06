@@ -15,7 +15,14 @@ eureka:
 zuul:
   prefix: /api # 添加路由前缀
   routes:
+    # 商品管理后台服务，地址http://api.leyou.com/api/item/category/list，controller地址/category/list
     item-service: /item/**
+    # 上传文件服务，因为web端请求地址就是http://api.leyou.com/api/upload/image,而controller中地址是/upload/image,
+    # 所以在匹配路径找服务时，不应该在去除upload的匹配前缀。
+    upload-service:
+      path: /upload/**
+      serviceId: upload-service
+      stripPrefix: false
 #  retryable: true
 ribbon:
   ConnectTimeout: 1000 # 连接超时时间(ms)
