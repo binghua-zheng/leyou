@@ -17,7 +17,12 @@ public enum ExceptionEnum {
     UPLOAD_FILE_ERROR(500, "上传文件错误"),
     SPECGROP_NOT_FOND(404, "规格组没查到"),
     SPEC_INFO_NOT_FOND(404, "规格信息没查到"),
-    GOODS_NOT_FOND(404, "商品信息没查到")
+    GOODS_NOT_FOND(404, "商品信息没查到"),
+    GOODS_SAVE_ERROR(500, "添加品牌错误"),
+    GOODS_DETAIL_NOT_FOND(404, "商品详情信息没查到"),
+    GOODS_SKU_NOT_FOND(404, "商品SKU信息没查到"),
+    GOODS_UPDATE_ERROR(500, "更新商品错误"),
+    GOODS_ID_NOT_FOUND(400, "商品ID没有查到"),
     ;
 
     private int code;

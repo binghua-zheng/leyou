@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -92,6 +91,20 @@ public class BrandService {
         Brand brand = new Brand();
         brand.setId(brandId);
         Brand result = brandMapper.selectByPrimaryKey(brand);
+        if (result == null) {
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
+        }
+        return result;
+    }
+
+    /**
+     * 根据分类ID查询品牌ID
+     *
+     * @param cid
+     * @return
+     */
+    public List<Brand> queryBrandByCid(Long cid) {
+        List<Brand> result = brandMapper.queryBrandByCid(cid);
         if (result == null) {
             throw new LyException(ExceptionEnum.BRAND_NOT_FOND);
         }
